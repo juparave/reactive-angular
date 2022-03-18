@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
       map(courses => courses.sort(sortCoursesBySeqNo))
     );
 
+    courses$.subscribe(val => console.log(val));
+
     this.beginnerCourses$ = courses$.pipe(
       map(courses => courses.filter(course => course.category == "BEGINNER"))
     );
