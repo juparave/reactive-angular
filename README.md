@@ -40,3 +40,14 @@ Adding `disableHostCheck` to force reload on changes on Codespace, add to `packa
 ## Codespace test URL
 
 https://juparave-reactive-angular-4g47x4r27w46-4200.githubpreview.dev/
+
+## Start app for development
+
+Run frontend part
+
+    $ npm start
+
+Run server part
+
+    $ npm run server
+
