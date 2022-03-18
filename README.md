@@ -37,4 +37,6 @@ Adding `disableHostCheck` to force reload on changes on Codespace, add to `packa
 ```
     "start": "./node_modules/.bin/ng serve  --proxy-config ./proxy.json --disableHostCheck=true",
 ```
+## Codespace test URL
 
+https://juparave-reactive-angular-4g47x4r27w46-4200.githubpreview.dev/
