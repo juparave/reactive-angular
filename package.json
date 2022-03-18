@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "./node_modules/.bin/ng serve  --proxy-config ./proxy.json",
+    "start": "./node_modules/.bin/ng serve  --proxy-config ./proxy.json --disableHostCheck=true",
     "server": "./node_modules/.bin/ts-node -P ./server/server.tsconfig.json ./server/server.ts",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -17,6 +17,7 @@
     "@angular/compiler": "~13.3.0",
     "@angular/core": "~13.3.0",
     "@angular/forms": "~13.3.0",
+    "@angular/material": "^13.3.0",
     "@angular/material-moment-adapter": "^13.3.0",
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
