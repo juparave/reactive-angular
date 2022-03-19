@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { concatMap, finalize, tap } from "rxjs/operators";
 
 @Injectable()
 export class LoadingService {
@@ -8,8 +9,14 @@ export class LoadingService {
 
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
-  showLoaderUntilCompleted<T>(obs$: Observable<T>): Observable<T> | undefined {
-    return undefined;
+  showLoaderUntilCompleted<T>(obs$: Observable<T>): Observable<T> {
+    return of(null)
+    .pipe(
+      tap(() => this.loadingOn()),
+      // the values emited by the input observable
+      concatMap(() => obs$),
+      finalize(() => this.loadingOff())
+    )
   }
 
   loadingOn() {
