@@ -1,16 +1,16 @@
-import {Request, Response} from 'express';
-import {COURSES} from "./db-data";
-import {setTimeout} from 'timers';
+import { Request, Response } from 'express';
+import { COURSES } from "./db-data";
+import { setTimeout } from 'timers';
 
 
 export function saveCourse(req: Request, res: Response) {
 
-  /*
+    /*
   console.log("ERROR saving course!");
   res.sendStatus(500);
   return;
 
-  */
+     */
 
     const id = req.params["id"],
         changes = req.body;
@@ -18,8 +18,8 @@ export function saveCourse(req: Request, res: Response) {
     console.log("Saving course changes", id, JSON.stringify(changes));
 
     const newCourse = {
-      ...COURSES[id],
-      ...changes
+        ...COURSES[id],
+        ...changes
     };
 
     COURSES[id] = newCourse;
@@ -30,7 +30,7 @@ export function saveCourse(req: Request, res: Response) {
 
         res.status(200).json(COURSES[id]);
 
-    }, 2000);
+    }, 500);
 
 
 
