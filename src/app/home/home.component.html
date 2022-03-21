@@ -6,15 +6,13 @@
     <mat-tab-group>
 
         <mat-tab label="Beginners">
-          <app-courses-card-list [courses]="beginnerCourses$ | async"
-              (coursesChanged)="reloadCourses()">
+          <app-courses-card-list [courses]="beginnerCourses$ | async">
 
           </app-courses-card-list>
         </mat-tab>
 
         <mat-tab label="Advanced">
-          <app-courses-card-list [courses]="advancedCourses$ | async"
-              (coursesChanged)="reloadCourses()">
+          <app-courses-card-list [courses]="advancedCourses$ | async">
 
           </app-courses-card-list>
         </mat-tab>
