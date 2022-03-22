@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay }  from 'rxjs/operators';
 
 import { Course } from '../model/course';
-import {Lesson} from '../model/lesson';
+import { Lesson } from '../model/lesson';
 
 
 @Injectable({
@@ -14,6 +14,15 @@ export class CoursesService {
 
 
   constructor(private http: HttpClient) {
+
+  }
+
+  loadCourseById(courseID: number): Observable<Course> {
+
+    return this.http.get<Course>(`/api/courses/${courseID}`)
+      .pipe(
+        shareReplay()
+      );
 
   }
 
