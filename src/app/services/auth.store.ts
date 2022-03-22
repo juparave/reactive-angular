@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { User } from '../model/user';
 
 
 @Injectable({
@@ -7,13 +10,35 @@ import { Observable } from 'rxjs';
 })
 export class AuthStore {
 
-  user$: Observable<User>;
+  private subject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+
+  user$: Observable<User | null> = this.subject.asObservable();
 
   isLoggedIn$: Observable<boolean>;
 
   isLoggedOut$: Observable<boolean>;
 
-  
+  constructor(private http: HttpClient) {
+
+    this.isLoggedIn$ = this.user$.pipe(map(user => !!user));
+
+    this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
+  }
+
+
+  login(email: string, password: string): Observable<User> {
+
+    return this.http.post<User>('/api/login', {email, password})
+    .pipe(
+      tap((user: User) => this.subject.next(user)),
+      shareReplay()
+    );
+
+  }
+
+  logout() {
+    this.subject.next(null);
+  }
 
 
 }
