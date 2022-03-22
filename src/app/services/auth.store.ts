@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { User } from '../model/user';
 
+const AUTH_DATA = "auth_data";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class AuthStore {
     this.isLoggedIn$ = this.user$.pipe(map(user => !!user));
 
     this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
+
+    const user = localStorage.getItem(AUTH_DATA);
+
+    if (user) {
+      this.subject.next(JSON.parse(user));
+    }
+
   }
 
 
@@ -30,13 +38,17 @@ export class AuthStore {
 
     return this.http.post<User>('/api/login', {email, password})
     .pipe(
-      tap((user: User) => this.subject.next(user)),
+      tap((user: User) => {
+        this.subject.next(user);
+        localStorage.setItem(AUTH_DATA, JSON.stringify(user));
+      }),
       shareReplay()
     );
 
   }
 
   logout() {
+    localStorage.removeItem(AUTH_DATA);
     this.subject.next(null);
   }
 
