@@ -9,7 +9,7 @@ import { Course } from '../model/course';
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
+export class CoursesService {
 
 
   constructor(private http: HttpClient) {

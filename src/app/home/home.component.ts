@@ -5,7 +5,6 @@ import { catchError, delay, delayWhen, filter, finalize, map, retryWhen, shareRe
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
-import { CourseService } from '../services/courses.service';
 import { LoadingService } from '../loading/loading.service';
 import { MessagesService } from '../messages/messages.services';
 import { CoursesStore } from '../services/courses.store';
